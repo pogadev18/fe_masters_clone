@@ -11,12 +11,42 @@
 
   &__wrapper {
     @include flex-align-justify;
+
+    @media screen and (max-width: 735px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 
   &__logo {
     img {
       width: 25rem;
       heigt: 4rem;
+    }
+  }
+
+  &__nav {
+    @media screen and (max-width: 550px) {
+      display: none;
+    }
+
+    &--show {
+      display: block;
+    }
+
+    // &--hide {
+    //   display: none;
+    // }
+  }
+
+  &__mobileMenuIcon {
+    display: none !important;
+    cursor: pointer;
+    color: #fff;
+    font-size: 4rem !important;
+
+    @media screen and (max-width: 550px) {
+      display: inline-block !important;
     }
   }
 

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import MenuIcon from '@material-ui/icons/Menu';
 
 import BlackLives from './BlackLives/BlackLives';
 import Wrapper from '../Wrapper/Wrapper';
@@ -9,7 +10,13 @@ import logo from '../../assets/images/logo.svg';
 
 import './Header.scss';
 
-const Header = () => {
+const Header: FC = () => {
+  const [isMenuVisible, setIsMenuVisible] = useState<boolean>(true);
+
+  const toggleMenu = (): void => {
+    setIsMenuVisible(isMenuVisible => !isMenuVisible);
+  };
+
   return (
     <>
       <BlackLives />
@@ -22,9 +29,17 @@ const Header = () => {
               </NavLink>
             </div>
 
-            <div className='header__nav'>
-              <NavLinks />
-            </div>
+            <MenuIcon onClick={toggleMenu} className='header__mobileMenuIcon' />
+
+            {isMenuVisible ? (
+              <div
+                className={`header__nav ${
+                  isMenuVisible ? 'header__nav--show' : 'header__nav--hide'
+                }`}
+              >
+                <NavLinks />
+              </div>
+            ) : null}
           </Wrapper>
         </div>
         <svg
