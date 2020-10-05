@@ -11,7 +11,11 @@ a {
   cursor: pointer;
   font-size: 1.6rem;
   transition: all 0.5s;
-  color: #0e8488;
+  color: #aaa;
+
+  &:hover {
+    color: #fff;
+  }
 }
 
 button {

@@ -1,0 +1,31 @@
+@import '../../assets/styles/mixins/mixins';
+
+.header {
+  position: relative;
+  background: linear-gradient(90deg, #c02d28, #e66225);
+
+  &__inner {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 0;
+  }
+
+  &__wrapper {
+    @include flex-align-justify;
+  }
+
+  &__logo {
+    img {
+      width: 25rem;
+      heigt: 4rem;
+    }
+  }
+
+  &__diagonal {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    fill: #e66225;
+    height: 24px;
+    width: 100%;
+  }
+}

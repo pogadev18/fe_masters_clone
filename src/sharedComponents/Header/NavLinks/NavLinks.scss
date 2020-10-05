@@ -1,0 +1,20 @@
+@import '../../../assets/styles/variables/colors';
+
+.navigation {
+  &__list {
+    li {
+      display: inline-block;
+      margin-left: 1.7rem;
+    }
+  }
+
+  &__join {
+    background: $secondRed;
+    padding: 1rem 2rem;
+    color: $white;
+
+    &:hover {
+      background: $mainRed;
+    }
+  }
+}

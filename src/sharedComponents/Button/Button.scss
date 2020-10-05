@@ -1,0 +1,8 @@
+.button {
+  cursor: pointer;
+  border-radius: 4rem;
+
+  &:hover {
+    transition: all 0.3s;
+  }
+}

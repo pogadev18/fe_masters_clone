@@ -1,10 +1,12 @@
 import React from 'react';
 
+import Header from '../Header/Header';
+
 function App() {
   return (
-    <div className='App'>
-      <h1>FE MASTERS</h1>
-    </div>
+    <main className='app'>
+      <Header />
+    </main>
   );
 }
 
