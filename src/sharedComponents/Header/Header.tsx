@@ -5,22 +5,32 @@ import MenuIcon from '@material-ui/icons/Menu';
 import BlackLives from './BlackLives/BlackLives';
 import Wrapper from '../Wrapper/Wrapper';
 import NavLinks from './NavLinks/NavLinks';
-
+import SideDrawer from './SideDrawer/SideDrawer';
+import Backdrop from '../Backdrop/Backdrop';
 import logo from '../../assets/images/logo.svg';
 
 import './Header.scss';
 
 const Header: FC = () => {
-  const [isMenuVisible, setIsMenuVisible] = useState<boolean>(true);
+  const [drawerIsVisible, setDrawerIsVisible] = useState<boolean>(false);
 
-  const toggleMenu = (): void => {
-    setIsMenuVisible(isMenuVisible => !isMenuVisible);
+  const toggleDrawer = (): void => {
+    setDrawerIsVisible(drawerIsVisible => !drawerIsVisible);
   };
 
   return (
     <>
       <BlackLives />
       <header className='header'>
+        {drawerIsVisible && <Backdrop onClick={toggleDrawer} />}
+        {drawerIsVisible && (
+          <SideDrawer onClick={toggleDrawer} drawerIsVisible={drawerIsVisible}>
+            <nav className='header__drawer-nav'>
+              <NavLinks />
+            </nav>
+          </SideDrawer>
+        )}
+
         <div className='header__inner'>
           <Wrapper customClass='header__wrapper'>
             <div className='header__logo'>
@@ -29,17 +39,14 @@ const Header: FC = () => {
               </NavLink>
             </div>
 
-            <MenuIcon onClick={toggleMenu} className='header__mobileMenuIcon' />
+            <MenuIcon
+              onClick={toggleDrawer}
+              className='header__mobileMenuIcon'
+            />
 
-            {isMenuVisible ? (
-              <div
-                className={`header__nav ${
-                  isMenuVisible ? 'header__nav--show' : 'header__nav--hide'
-                }`}
-              >
-                <NavLinks />
-              </div>
-            ) : null}
+            <nav className='header__nav'>
+              <NavLinks />
+            </nav>
           </Wrapper>
         </div>
         <svg

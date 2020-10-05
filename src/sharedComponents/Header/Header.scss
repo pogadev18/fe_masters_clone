@@ -16,6 +16,11 @@
       flex-direction: column;
       align-items: flex-start;
     }
+
+    @media screen and (max-width: 550px) {
+      flex-direction: row;
+      @include flex-align-justify;
+    }
   }
 
   &__logo {
@@ -29,14 +34,6 @@
     @media screen and (max-width: 550px) {
       display: none;
     }
-
-    &--show {
-      display: block;
-    }
-
-    // &--hide {
-    //   display: none;
-    // }
   }
 
   &__mobileMenuIcon {
