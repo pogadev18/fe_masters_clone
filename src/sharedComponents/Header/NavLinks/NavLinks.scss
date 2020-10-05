@@ -1,0 +1,39 @@
+@import '../../../assets/styles/variables/colors';
+
+.navigation {
+  @media screen and (max-width: 735px) {
+    margin: 2rem 0;
+  }
+
+  @media screen and (max-width: 550px) {
+    margin: 0;
+    padding: 2rem 0 0 2rem;
+  }
+
+  li {
+    display: inline-block;
+    margin-left: 1.7rem;
+
+    @media screen and (max-width: 735px) {
+      &:first-of-type {
+        margin-left: 0;
+      }
+    }
+
+    @media screen and (max-width: 550px) {
+      display: block;
+      margin-left: 0;
+      margin-bottom: 3rem;
+    }
+  }
+
+  &__join {
+    background: $secondRed;
+    padding: 1rem 2rem;
+    color: $white;
+
+    &:hover {
+      background: $mainRed;
+    }
+  }
+}

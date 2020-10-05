@@ -1,0 +1,16 @@
+@import '../../../assets/styles/variables/colors';
+
+.blm {
+  background: $black;
+  color: $white;
+  text-align: center;
+  padding: 10px 0;
+  font-weight: 700;
+
+  a {
+    font-weight: 400;
+    display: inline-block;
+    margin-left: 1rem;
+    color: #dd625e;
+  }
+}
