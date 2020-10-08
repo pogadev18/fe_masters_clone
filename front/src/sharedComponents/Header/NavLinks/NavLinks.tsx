@@ -17,10 +17,10 @@ const NavLinks: FC = () => (
       <NavLink to='/courses'>Pricing</NavLink>
     </li>
     <li>
-      <NavLink to='/courses'>Login</NavLink>
+      <NavLink to='/login'>Login</NavLink>
     </li>
     <li>
-      <Button urlPath='/courses' customClass='navigation__join'>
+      <Button urlPath='/signup' customClass='navigation__join'>
         Join Now
       </Button>
     </li>
