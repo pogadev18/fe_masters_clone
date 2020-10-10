@@ -1,11 +1,9 @@
 import React from 'react';
 
-import Header from '../Header/Header';
-
 function App() {
   return (
     <main className='app'>
-      <Header />
+      <h1>Welcome to FE Masters</h1>
     </main>
   );
 }

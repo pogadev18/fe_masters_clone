@@ -1,0 +1,27 @@
+.signup {
+  margin-top: 5rem;
+
+  &__formGroup {
+    margin-bottom: 2rem;
+  }
+
+  label {
+    display: block;
+    font-size: 2rem;
+  }
+
+  input {
+    width: 40rem;
+    padding: 1.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 0.1rem solid #ccc;
+  }
+
+  button {
+    width: 40rem;
+    background: #ba3326;
+    color: #fff;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+  }
+}
