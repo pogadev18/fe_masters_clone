@@ -16,6 +16,7 @@ import Header from './sharedComponents/Header/Header';
 import App from './sharedComponents/App/App';
 import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
+import Formik from './pages/Formik/Formik';
 
 import './assets/styles/custom.scss';
 
@@ -33,6 +34,9 @@ ReactDOM.render(
           </Route>
           <Route path='/login' exact>
             <Login />
+          </Route>
+          <Route path='/formik' exact>
+            <Formik />
           </Route>
           <Redirect to='/' />
         </Switch>
