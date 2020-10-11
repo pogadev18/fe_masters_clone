@@ -1,12 +1,12 @@
 import React from 'react';
 
-import YoutubeForm from './components/YoutubeForm';
+import FormikContaier from '../../sharedComponents/Forms/FormikContainer';
 
 const Formik = () => {
   return (
     <div>
       <h1>Formik Practice</h1>
-      <YoutubeForm />
+      <FormikContaier />
     </div>
   );
 };
