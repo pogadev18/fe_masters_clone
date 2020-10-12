@@ -9,7 +9,7 @@ type TOption = {
   key: string;
 };
 
-export type TSelectProps = TInputProps & {
+export type TMultipeOptions = TInputProps & {
   options?: TOption[];
 };
 

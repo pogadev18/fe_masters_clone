@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { Field, ErrorMessage } from 'formik';
 
-import { TSelectProps } from './formTypes';
+import { TMultipeOptions } from './formTypes';
 import TextError from './TextError';
 
-const Select: FC<TSelectProps> = ({
+const Select: FC<TMultipeOptions> = ({
   label,
   name,
   requiredText,
@@ -14,7 +14,7 @@ const Select: FC<TSelectProps> = ({
   return (
     <div className='formControl'>
       <label htmlFor={name}>
-        {label} {requiredText && <span>(required)</span>}
+        {label} {requiredText && <span>(*)</span>}
       </label>
       <Field as='select' id={name} name={name} {...rest}>
         {options?.map(option => (
