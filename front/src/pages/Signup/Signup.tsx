@@ -1,72 +1,74 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
 
 import Wrapper from '../../sharedComponents/Wrapper/Wrapper';
+import FormikControl from '../../sharedComponents/Forms/FormikControl';
 
 import './Signup.scss';
 
 const Signup: FC = () => {
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const initialValues = {
+    name: '',
+    email: '',
+    password: ''
+  };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const validationSchema = Yup.object({
+    name: Yup.string().required('Name is required'),
+    email: Yup.string()
+      .email('Invalid e-mail format')
+      .required('E-mail is required'),
+    password: Yup.string().required('Password is required')
+  });
 
-    try {
-      const res = await fetch('http://localhost:8000/api/signup', {
-        method: 'POST',
-        body: JSON.stringify({ name, email, password }),
-        headers: { 'Content-Type': 'application/json' }
-      });
-
-      const data = await res.json();
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
+  const handleSubmit = (values: any) => {
+    console.log('form data', values);
   };
 
   return (
     <Wrapper customClass='signup'>
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <div className='signup__formGroup'>
-          <label htmlFor='name'>Name</label>
-          <input
-            value={name}
-            type='text'
-            name='name'
-            required
-            onChange={e => setName(e.target.value)}
-          />
-          <div className='name error' />
-        </div>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {formik => {
+          return (
+            <Form>
+              <FormikControl
+                control='input'
+                type='text'
+                label='Your name'
+                name='name'
+                requiredText
+              />
+              <FormikControl
+                control='input'
+                type='email'
+                label='E-mail'
+                name='email'
+                requiredText
+              />
+              <FormikControl
+                control='input'
+                type='password'
+                label='Password'
+                name='password'
+                requiredText
+              />
 
-        <div className='signup__formGroup'>
-          <label htmlFor='email'>Email</label>
-          <input
-            value={email}
-            type='email'
-            name='email'
-            required
-            onChange={e => setEmail(e.target.value)}
-          />
-          <div className='email error' />
-        </div>
-
-        <div className='signup__formGroup'>
-          <label htmlFor='password'>Password</label>
-          <input
-            value={password}
-            type='password'
-            name='password'
-            required
-            onChange={e => setPassword(e.target.value)}
-          />
-          <div className='password error' />
-        </div>
-        <button type='submit'>submit</button>
-      </form>
+              <button
+                type='submit'
+                disabled={!formik.isValid || formik.isSubmitting}
+              >
+                Submit
+              </button>
+            </Form>
+          );
+        }}
+      </Formik>
     </Wrapper>
   );
 };
