@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { Formik, Form } from 'formik';
+import React, {FC} from 'react';
+import {Formik, Form} from 'formik';
 import * as Yup from 'yup';
 
 import Wrapper from '../../sharedComponents/Wrapper/Wrapper';

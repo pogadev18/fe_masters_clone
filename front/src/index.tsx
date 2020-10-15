@@ -6,10 +6,10 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom';
+import { Provider } from "react-redux";
 
 // store
-import { StateProvider } from './Store/Store';
-import { mainReducers } from './reducers/mainReducers';
+import store from "./redux/store";
 
 // pages & components
 import Header from './sharedComponents/Header/Header';
@@ -21,23 +21,23 @@ import './assets/styles/custom.scss';
 
 ReactDOM.render(
   <React.StrictMode>
-    <StateProvider reducer={mainReducers}>
+    <Provider store={ store }>
       <Router>
-        <Header />
+        <Header/>
         <Switch>
           <Route path='/' exact>
-            <App />
+            <App/>
           </Route>
           <Route path='/signup' exact>
-            <Signup />
+            <Signup/>
           </Route>
           <Route path='/login' exact>
-            <Login />
+            <Login/>
           </Route>
-          <Redirect to='/' />
+          <Redirect to='/'/>
         </Switch>
       </Router>
-    </StateProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
