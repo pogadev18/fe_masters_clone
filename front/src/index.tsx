@@ -6,18 +6,26 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom';
-import { Provider } from "react-redux";
 
-// store
-import store from "./redux/store";
+// redux stuff
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from 'react-redux';
+import thunk from "redux-thunk";
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+// reducers
+import { reducers } from "./redux/reducers";
 
 // pages & components
 import Header from './sharedComponents/Header/Header';
 import App from './sharedComponents/App/App';
-import Signup from './pages/Signup/Signup';
+import { Signup } from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 
 import './assets/styles/custom.scss';
+
+// store
+const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <React.StrictMode>

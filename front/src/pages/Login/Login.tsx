@@ -1,12 +1,7 @@
 import React, { FC, useState } from 'react';
-import { useDispatch } from "react-redux";
 
 import Wrapper from '../../sharedComponents/Wrapper/Wrapper';
-import { BASE_API_URL } from "../../config";
-import { TStore } from "../../redux/store";
-
-// user action
-import { loginUser } from "../../redux";
+import { BASE_API_URL } from '../../config';
 
 import './Login.scss';
 

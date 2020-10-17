@@ -1,5 +1,9 @@
-import React, {FC} from 'react';
-import {Formik, Form} from 'formik';
+import React, { FC } from 'react';
+import { Formik, Form } from 'formik';
+import { connect } from "react-redux";
+import { registerUser } from "../../redux/actions";
+import { IUserInitialState } from "../../redux/reducers/user";
+import { IStoreState } from "../../redux/reducers";
 import * as Yup from 'yup';
 
 import Wrapper from '../../sharedComponents/Wrapper/Wrapper';
@@ -7,7 +11,12 @@ import FormikControl from '../../sharedComponents/Forms/FormikControl';
 
 import './Signup.scss';
 
-const Signup: FC = () => {
+interface ISignupProps {
+  userState: IUserInitialState;
+  registerUser: any;
+}
+
+const _Signup: FC<ISignupProps> = ({userState, registerUser}) => {
   const initialValues = {
     name: '',
     email: '',
@@ -23,18 +32,19 @@ const Signup: FC = () => {
   });
 
   const handleSubmit = (values: any) => {
-    console.log('form data', values);
+    console.log(`userState from store >>> ${ userState }`);
+    registerUser(values);
   };
 
   return (
     <Wrapper customClass='signup'>
       <h1>Sign Up</h1>
       <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
+        initialValues={ initialValues }
+        validationSchema={ validationSchema }
+        onSubmit={ handleSubmit }
       >
-        {formik => {
+        { formik => {
           return (
             <Form>
               <FormikControl
@@ -61,16 +71,25 @@ const Signup: FC = () => {
 
               <button
                 type='submit'
-                disabled={!formik.isValid || formik.isSubmitting}
+                disabled={ !formik.isValid || formik.isSubmitting }
               >
                 Submit
               </button>
             </Form>
           );
-        }}
+        } }
       </Formik>
     </Wrapper>
   );
 };
 
-export default Signup;
+const mapStateToProps = (state: IStoreState): { userState: IUserInitialState } => {
+  return {
+    userState: state.user
+  }
+}
+
+export const Signup = connect(
+  mapStateToProps,
+  {registerUser})
+(_Signup);
