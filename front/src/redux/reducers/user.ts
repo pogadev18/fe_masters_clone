@@ -1,24 +1,26 @@
-import { IRegisterUserAction } from "../actions";
-import { ActionTypes } from "../actions/types";
+import { Action, ActionTypes } from "../actions";
 
 export interface IUserInitialState {
   isLoggedIn: boolean;
+  isRegistered: boolean;
   userName: string;
 }
 
 const userInitialState = {
   isLoggedIn: false,
+  isRegistered: false,
   userName: ''
 }
 
 export const userReducer = (
   state: IUserInitialState = userInitialState,
-  action: IRegisterUserAction
+  action: Action
 ) => {
   switch (action.type) {
     case ActionTypes.registerUser:
       return {
         ...state,
+        isRegistered: true,
         userName: action.payload
       }
 

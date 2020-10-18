@@ -1,13 +1,8 @@
-/*
-* In redux,  we don't really care about actually assigning a real string
-* to this enum. The only requirement of a type in a redux action is that
-* it must be some unique value. In theory, you don't a STRING, but in
-* reality, it doesn't make a difference.
-*
-* registerUser it's by default 0
-*
-* */
+import { IRegisterUserAction, ILoginUserAction } from "./user";
 
 export enum ActionTypes {
-  registerUser = 'REGISTER_USER'
+  registerUser = 'REGISTER_USER',
+  loginUser = 'LOGIN_USER'
 }
+
+export type Action = IRegisterUserAction | ILoginUserAction;

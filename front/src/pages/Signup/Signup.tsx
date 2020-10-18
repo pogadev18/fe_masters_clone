@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import { Formik, Form } from 'formik';
 import { connect } from "react-redux";
+import * as Yup from 'yup';
+
 import { registerUser } from "../../redux/actions";
 import { IUserInitialState } from "../../redux/reducers/user";
 import { IStoreState } from "../../redux/reducers";
-import * as Yup from 'yup';
 
 import Wrapper from '../../sharedComponents/Wrapper/Wrapper';
 import FormikControl from '../../sharedComponents/Forms/FormikControl';
@@ -13,7 +14,13 @@ import './Signup.scss';
 
 interface ISignupProps {
   userState: IUserInitialState;
-  registerUser: any;
+  registerUser: Function;
+}
+
+interface IValues {
+  name: string;
+  email: string;
+  password: string;
 }
 
 const _Signup: FC<ISignupProps> = ({userState, registerUser}) => {
@@ -31,8 +38,7 @@ const _Signup: FC<ISignupProps> = ({userState, registerUser}) => {
     password: Yup.string().required('Password is required')
   });
 
-  const handleSubmit = (values: any) => {
-    console.log(`userState from store >>> ${ userState }`);
+  const handleSubmit = (values: IValues) => {
     registerUser(values);
   };
 
@@ -79,6 +85,13 @@ const _Signup: FC<ISignupProps> = ({userState, registerUser}) => {
           );
         } }
       </Formik>
+      {
+        localStorage.getItem("userRegistered") && (
+          <p>Thanks for your registration, { localStorage.getItem("userRegistered") }.
+            You can now proceed to <span>Login</span>
+          </p>
+        )
+      }
     </Wrapper>
   );
 };
