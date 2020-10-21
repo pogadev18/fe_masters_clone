@@ -1,14 +1,30 @@
 import React, { FC } from 'react';
 import { Formik, Form } from 'formik';
+import { connect } from 'react-redux';
 import * as Yup from 'yup';
+
+import { registerUser } from '../../redux/actions';
+import { IUserInitialState } from '../../redux/reducers/user';
+import { IStoreState } from '../../redux/reducers';
 
 import Wrapper from '../../sharedComponents/Wrapper/Wrapper';
 import FormikControl from '../../sharedComponents/Forms/FormikControl';
 
 import './Signup.scss';
 
-const Signup: FC = () => {
-  const initialValues = {
+interface ISignupProps {
+  userState: IUserInitialState;
+  registerUser: Function;
+}
+
+interface IValues {
+  name: string;
+  email: string;
+  password: string;
+}
+
+const _Signup: FC<ISignupProps> = ({ userState, registerUser }) => {
+  const initialValues: IValues = {
     name: '',
     email: '',
     password: ''
@@ -19,11 +35,11 @@ const Signup: FC = () => {
     email: Yup.string()
       .email('Invalid e-mail format')
       .required('E-mail is required'),
-    password: Yup.string().required('Password is required')
+    password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required')
   });
 
-  const handleSubmit = (values: any) => {
-    console.log('form data', values);
+  const handleSubmit = (values: IValues) => {
+    registerUser(values);
   };
 
   return (
@@ -73,4 +89,13 @@ const Signup: FC = () => {
   );
 };
 
-export default Signup;
+const mapStateToProps = (state: IStoreState): { userState: IUserInitialState } => {
+  return {
+    userState: state.user
+  };
+};
+
+export const Signup = connect(
+  mapStateToProps,
+  { registerUser })
+(_Signup);

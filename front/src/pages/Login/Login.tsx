@@ -1,10 +1,12 @@
 import React, { FC, useState } from 'react';
 
 import Wrapper from '../../sharedComponents/Wrapper/Wrapper';
+import { BASE_API_URL } from '../../config';
 
 import './Login.scss';
 
 const Login: FC = () => {
+  // const dispatch = useDispatch();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -12,13 +14,14 @@ const Login: FC = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:8000/api/login', {
+      const res = await fetch(`${BASE_API_URL}/login`, {
         method: 'POST',
         body: JSON.stringify({ email, password }),
         headers: { 'Content-Type': 'application/json' }
       });
 
       const data = await res.json();
+      // dispatch(loginUser(data.userName));
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -38,7 +41,7 @@ const Login: FC = () => {
             required
             onChange={e => setEmail(e.target.value)}
           />
-          <div className='email error' />
+          <div className='email error'/>
         </div>
 
         <div className='login__formGroup'>
@@ -50,7 +53,7 @@ const Login: FC = () => {
             required
             onChange={e => setPassword(e.target.value)}
           />
-          <div className='password error' />
+          <div className='password error'/>
         </div>
         <button type='submit'>submit</button>
       </form>

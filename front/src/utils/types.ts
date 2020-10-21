@@ -1,6 +1,7 @@
 // used in userReducer.ts
 export type TUserState = {
   isLoggedIn: boolean;
+  name: string;
 };
 
 export type TState = {
