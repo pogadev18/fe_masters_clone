@@ -1,28 +1,46 @@
-import { Action, ActionTypes } from "../actions";
+import { Actions, ActionTypes } from '../actions';
 
 export interface IUserInitialState {
-  isLoggedIn: boolean;
-  isRegistered: boolean;
-  userName: string;
+  loading: boolean;
+  status: string;
+  userName: string | null;
+  notifMessages: string[];
 }
 
 const userInitialState = {
-  isLoggedIn: false,
-  isRegistered: false,
-  userName: ''
-}
+  loading: false,
+  status: '',
+  userName: '',
+  notifMessages: []
+};
 
 export const userReducer = (
   state: IUserInitialState = userInitialState,
-  action: Action
+  action: Actions
 ) => {
   switch (action.type) {
+    case ActionTypes.requestLoading:
+      return {
+        ...state,
+        loading: true
+      };
+
     case ActionTypes.registerUser:
       return {
         ...state,
-        isRegistered: true,
+        loading: false,
+        status: 'ok',
+        notifMessages: [...state.notifMessages, action.message],
         userName: action.payload
-      }
+      };
+
+    case ActionTypes.requestFailed:
+      return {
+        ...state,
+        loading: false,
+        status: 'error',
+        notifMessages: [...state.notifMessages, ...action.payload],
+      };
 
     default:
       return state;

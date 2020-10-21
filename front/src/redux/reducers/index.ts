@@ -1,7 +1,7 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
-import { userReducer } from "./user";
-import { IUserInitialState } from "./user";
+import { userReducer } from './user';
+import { IUserInitialState } from './user';
 
 export interface IStoreState {
   user: IUserInitialState

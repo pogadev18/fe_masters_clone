@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { Formik, Form } from 'formik';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import * as Yup from 'yup';
 
-import { registerUser } from "../../redux/actions";
-import { IUserInitialState } from "../../redux/reducers/user";
-import { IStoreState } from "../../redux/reducers";
+import { registerUser } from '../../redux/actions';
+import { IUserInitialState } from '../../redux/reducers/user';
+import { IStoreState } from '../../redux/reducers';
 
 import Wrapper from '../../sharedComponents/Wrapper/Wrapper';
 import FormikControl from '../../sharedComponents/Forms/FormikControl';
@@ -23,8 +23,8 @@ interface IValues {
   password: string;
 }
 
-const _Signup: FC<ISignupProps> = ({userState, registerUser}) => {
-  const initialValues = {
+const _Signup: FC<ISignupProps> = ({ userState, registerUser }) => {
+  const initialValues: IValues = {
     name: '',
     email: '',
     password: ''
@@ -35,22 +35,24 @@ const _Signup: FC<ISignupProps> = ({userState, registerUser}) => {
     email: Yup.string()
       .email('Invalid e-mail format')
       .required('E-mail is required'),
-    password: Yup.string().required('Password is required')
+    password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required')
   });
 
   const handleSubmit = (values: IValues) => {
     registerUser(values);
   };
 
+  console.log('userState >>>>', userState);
+
   return (
     <Wrapper customClass='signup'>
       <h1>Sign Up</h1>
       <Formik
-        initialValues={ initialValues }
-        validationSchema={ validationSchema }
-        onSubmit={ handleSubmit }
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
       >
-        { formik => {
+        {formik => {
           return (
             <Form>
               <FormikControl
@@ -77,21 +79,14 @@ const _Signup: FC<ISignupProps> = ({userState, registerUser}) => {
 
               <button
                 type='submit'
-                disabled={ !formik.isValid || formik.isSubmitting }
+                disabled={!formik.isValid || formik.isSubmitting}
               >
                 Submit
               </button>
             </Form>
           );
-        } }
+        }}
       </Formik>
-      {
-        localStorage.getItem("userRegistered") && (
-          <p>Thanks for your registration, { localStorage.getItem("userRegistered") }.
-            You can now proceed to <span>Login</span>
-          </p>
-        )
-      }
     </Wrapper>
   );
 };
@@ -99,10 +94,10 @@ const _Signup: FC<ISignupProps> = ({userState, registerUser}) => {
 const mapStateToProps = (state: IStoreState): { userState: IUserInitialState } => {
   return {
     userState: state.user
-  }
-}
+  };
+};
 
 export const Signup = connect(
   mapStateToProps,
-  {registerUser})
+  { registerUser })
 (_Signup);
