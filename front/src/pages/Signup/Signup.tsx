@@ -42,8 +42,6 @@ const _Signup: FC<ISignupProps> = ({ userState, registerUser }) => {
     registerUser(values);
   };
 
-  console.log('userState >>>>', userState);
-
   return (
     <Wrapper customClass='signup'>
       <h1>Sign Up</h1>
