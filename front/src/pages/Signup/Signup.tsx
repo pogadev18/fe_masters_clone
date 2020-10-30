@@ -35,12 +35,15 @@ const _Signup: FC<ISignupProps> = ({ userState, registerUser }) => {
     email: Yup.string()
       .email('Invalid e-mail format')
       .required('E-mail is required'),
-    password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required')
+    password: Yup.string().min(6, 'Password must be at least 6 characters')
+      .required('Password is required')
   });
 
   const handleSubmit = (values: IValues) => {
     registerUser(values);
   };
+
+  console.log(userState);
 
   return (
     <Wrapper customClass='signup'>
