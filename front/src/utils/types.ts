@@ -11,4 +11,3 @@ export type TState = {
 export type TAction = { type: string; payload?: object; value?: string };
 export type TReducer<T> = (state: T, action: TAction) => T;
 export type TDispatch = (action: TAction) => void;
-export type TContext = [TState, TDispatch];
