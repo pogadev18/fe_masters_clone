@@ -10,9 +10,9 @@ export interface IRegisterUser {
   password: string;
 }
 
-interface IRegisterResponse {
+export interface IRegisterResponse {
   userName: string;
-  errors?: object
+  errors?: object;
 }
 
 export interface IRegisterSuccess {
