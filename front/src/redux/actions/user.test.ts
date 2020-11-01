@@ -16,13 +16,22 @@ describe('async functions for user registration and login', () => {
     httpMock.restore();
   });
 
-  it('register a user with success after POST request is done', () => {
-    const mockedPostData = {
-      name: 'Bogdan',
-      email: 'bogdan@test.com',
-      password: 'test123'
-    };
+  const store = mockStore({
+    user: {
+      loading: false,
+      status: '',
+      userName: '',
+      notifMessages: []
+    }
+  });
 
+  const mockedPostData = {
+    name: 'Bogdan',
+    email: 'bogdan@test.com',
+    password: 'test123'
+  };
+
+  it('register a user with success after POST request is done', () => {
     httpMock.onPost(
       `${BASE_API_URL}/signup`,
       { mockedPostData },
@@ -34,18 +43,22 @@ describe('async functions for user registration and login', () => {
       { type: ActionTypes.registerUser }
     ];
 
-    const store = mockStore({
-      user: {
-        loading: false,
-        status: '',
-        userName: '',
-        notifMessages: []
-      }
-    });
-
     store.dispatch<any>(registerUser({ ...mockedPostData }))
-      .then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
+      .then(async () => {
+        expect(await store.getActions()).toEqual(expectedActions);
       });
+  });
+
+  it('fails the register POST request', () => {
+    httpMock.onPost(
+      `${BASE_API_URL}/signup`,
+      { mockedPostData },
+      { 'content-type': 'application/json' }
+    );
+
+    store.dispatch<any>(registerUser({...mockedPostData}))
+      .catch(async () => {
+        expect(await store.getActions()).toEqual(ActionTypes.requestFailed);
+      })
   });
 });
